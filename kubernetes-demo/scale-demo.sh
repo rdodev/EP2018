@@ -1,18 +1,25 @@
 #!/bin/bash
 # DEPLOYING & SCALING AN APP
 
+# import demo
+. ../demo-magic.sh -c
+
 # Assumes https://gitlab.com/rdodev/whereplot is checked out
-cd whereplot
-kubectl apply -f deployment/
-kubectl get pods
+cd ../../whereplot
+pe 'kubectl apply -f deployment/'
+pe 'kubectl get pods'
+pe 'minikube service frontend'
 
 # NOW LET'S SCALE"
 # defaults to 3
-kubectl deploy scale frontend --replicas=5
-kubectl get deploy frontend
+pe 'kubectl scale deployment frontend --replicas=5'
+pe 'kubectl get deployment frontend'
 # This may take a little while to show them all
-kubectl get pods
+pe 'kubectl get pods'
 
 # Scale back down to one replica
-kubectl scale scale frontend --replicas=1
-kubectl get pods
+pe 'kubectl scale deployment frontend --replicas=1'
+pe 'kubectl get pods'
+
+kubectl delete deployment frontend
+kubectl delete service frontend

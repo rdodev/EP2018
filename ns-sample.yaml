@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ep2019
+  labels:
+    laguage: python
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active
